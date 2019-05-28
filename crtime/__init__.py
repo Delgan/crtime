@@ -38,6 +38,8 @@ def parse_output(output, as_epoch):
 
 
 def get_crtimes(fnames, raise_on_error=True, as_epoch=False):
+    if system == "Windows":
+        return [(fname, os.stat(fname).st_ctime) for fname in fnames]
     if system != "Linux":
         return [(fname, os.stat(fname).st_birthtime) for fname in fnames]
 
